@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: moonlight
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn moonlightenterprises_project.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DJANGO_SETTINGS_MODULE
+        value: moonlightenterprises_project.settings
