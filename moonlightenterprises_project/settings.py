@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -77,14 +77,11 @@ WSGI_APPLICATION = 'moonlightenterprises_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_moonlight',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        conn_health_checks=True
+    )
 }
 
 
@@ -94,7 +91,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'eswariinpand@gmail.com'     # Your sender Gmail
-EMAIL_HOST_PASSWORD = 'poai korh smfl muje'                    # ❗️Use App Password instead (see below)
+EMAIL_HOST_PASSWORD = 'poai korh smfl muje'                    
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Password validation
